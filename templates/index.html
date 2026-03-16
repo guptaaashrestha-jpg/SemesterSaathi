@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semester Saathi — सेमेस्टर साथी</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="particles" id="particles"></div>
+    <!-- ── HEADER ── -->
+    <header>
+      <div class="logo-wrap">
+        <span class="logo-name">Semester Saathi</span>
+      </div>
+      <h1>Your Academic <span class="highlight">Story</span></h1>
+      <p class="header-sub">आपकी शैक्षणिक यात्रा, AI की नज़र से</p>
+      <div class="tagline">
+        <span>CGPA Calculator</span>
+        <span class="tagline-dot"></span>
+        <span>AI Mentorship</span>
+        <span class="tagline-dot"></span>
+        <span>Backlog Rescue</span>
+        <span class="tagline-dot"></span>
+        <span>English + हिंदी</span>
+      </div>
+    </header>
+
+    <!-- ── MAIN ── -->
+    <main>
+      <!-- ════════════════════════════════
+         SECTION 1 — CGPA CALCULATOR
+    ════════════════════════════════ -->
+      <div class="section-label">
+        <div class="section-num">01</div>
+        <div class="section-title">
+          <h2>CGPA Calculator</h2>
+          <p>अपने विषय, ग्रेड और क्रेडिट दर्ज करें</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <!-- Grade Scale Reference -->
+        <p class="scale-label">
+          Grade Scale | ग्रेड स्केल (Indian University Standard)
+        </p>
+        <div class="grade-scale">
+          <span class="grade-chip chip-o">O = 10</span>
+          <span class="grade-chip chip-aplus">A+ = 9</span>
+          <span class="grade-chip chip-a">A = 8</span>
+          <span class="grade-chip chip-bplus">B+ = 7</span>
+          <span class="grade-chip chip-b">B = 6</span>
+          <span class="grade-chip chip-cplus">C+ = 5.5</span>
+          <span class="grade-chip chip-c">C = 5</span>
+          <span class="grade-chip chip-f">F = 0</span>
+        </div>
+
+        <!-- Subject Rows -->
+        <div class="subjects-container" id="subjectsContainer"></div>
+
+        <!-- Add Subject Button -->
+        <button class="btn-add" onclick="addSubject()">
+          <span>+</span>
+          <span>Add Subject | विषय जोड़ें</span>
+        </button>
+
+        <!-- CGPA Display -->
+        <div class="cgpa-display" id="cgpaDisplay">
+          <div class="cgpa-left">
+            <h3>Your CGPA | आपका CGPA</h3>
+            <div class="cgpa-value" id="cgpaValue">—</div>
+          </div>
+          <div class="cgpa-right">
+            <div class="cgpa-status" id="cgpaStatus"></div>
+            <div class="cgpa-hint" id="cgpaHint">विषय जोड़ें और CGPA देखें</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="section-divider" />
+
+      <!-- ════════════════════════════════
+         SECTION 2 — AI MENTORSHIP
+    ════════════════════════════════ -->
+      <div class="section-label">
+        <div class="section-num">02</div>
+        <div class="section-title">
+          <h2>AI Mentorship | AI मार्गदर्शन</h2>
+          <p>Gemini AI आपकी कमज़ोरियाँ और सुधार का रास्ता बताएगा</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <p
+          style="
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-family: &quot;Noto Sans Devanagari&quot;, sans-serif;
+            line-height: 1.7;
+          "
+        >
+          Enter all your subjects and grades above, then click the button below.
+          Gemini AI will analyze your weak areas, next semester planning and
+          give you a complete improvement roadmap — in English and Hindi both.
+          <br />
+          ऊपर अपने सभी विषय और ग्रेड दर्ज करने के बाद नीचे बटन दबाएं। Gemini AI
+          आपके weak areas, अगले semester की planning और improvement roadmap
+          बताएगा — English और Hindi दोनों में।
+        </p>
+
+        <button class="btn-primary" id="analyzeBtn" onclick="analyzeGrades()">
+          🤖 मेरी कहानी बनाएं | Generate My Story
+        </button>
+
+        <!-- Result Card -->
+        <div class="result-card" id="analyzeResult">
+          <div class="loading-wrap" id="analyzeLoading" style="display: none">
+            <div class="loading-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <p class="loading-text">
+              Gemini सोच रहा है... | Gemini is thinking...
+            </p>
+          </div>
+          <div
+            class="result-content"
+            id="analyzeContent"
+            style="display: none"
+          ></div>
+        </div>
+      </div>
+
+      <hr class="section-divider" />
+
+      <!-- ════════════════════════════════
+         SECTION 3 — BACKLOG RESCUE
+    ════════════════════════════════ -->
+      <div class="section-label">
+        <div class="section-num">03</div>
+        <div class="section-title">
+          <h2>Backlog Rescue | बैकलॉग बचाव</h2>
+          <p>बैकलॉग है? घबराओ मत — AI एक plan बनाएगा</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <p
+          style="
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-family: &quot;Noto Sans Devanagari&quot;, sans-serif;
+            line-height: 1.7;
+          "
+        >
+          Enter the subjects in which you have backlogs below. Gemini AI will
+          create a week-by-week personalized study plan to help you clear your
+          backlogs in a realistic way.
+          <br /><br />
+          जिन विषयों में backlog है उन्हें नीचे दर्ज करें। Gemini AI आपको एक
+          week-by-week study plan देगा जिससे आप realistic तरीके से backlogs
+          clear कर सकें।
+        </p>
+
+        <!-- Backlog Rows -->
+        <div class="subjects-container" id="backlogContainer"></div>
+
+        <!-- Add Backlog Button -->
+        <button class="btn-add" onclick="addBacklog()">
+          <span>+</span>
+          <span>Add Backlog Subject | बैकलॉग विषय जोड़ें</span>
+        </button>
+
+        <!-- Rescue Button -->
+        <div style="margin-top: 20px">
+          <button class="btn-rescue" id="rescueBtn" onclick="rescueBacklog()">
+            🆘 मुझे बचाओ | Rescue Me
+          </button>
+        </div>
+
+        <!-- Backlog Result Card -->
+        <div class="result-card" id="backlogResult">
+          <div class="loading-wrap" id="backlogLoading" style="display: none">
+            <div class="loading-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <p class="loading-text">
+              बचाव योजना बन रही है... | Creating your rescue plan...
+            </p>
+          </div>
+          <div
+            class="result-content"
+            id="backlogContent"
+            style="display: none"
+          ></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+      <p>
+        Made with <span>♥</span> for every Indian student &nbsp;|&nbsp; हर
+        भारतीय छात्र के लिए बनाया गया
+      </p>
+      <p style="margin-top: 6px">
+        <strong>Semester Saathi</strong> — सेमेस्टर साथी &nbsp;|&nbsp; Powered
+        by Google Gemini AI
+      </p>
+    </footer>
+
+    <!-- ── SCRIPT ── -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
