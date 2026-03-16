@@ -50,7 +50,7 @@ All of it in both English and Hindi, so no student feels left behind.
 - No translation needed — it just works
 
 🎨 5. Golden / Amber UI
-- Deep navy blue dark theme
+- Golder and Sand colour theme
 - Animated grid background with floating particles
 - Smooth animations and transitions
 - Fully responsive — mobile and desktop
